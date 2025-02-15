@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+/* .custom-datepicker {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .react-datepicker__header {
+    background-color: #f0f0f0;
+  }
+  
+  .react-datepicker__day--selected {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .react-datepicker__day--today {
+    font-weight: bold;
+  } */
