@@ -2,11 +2,14 @@ import { useState } from "react";
 import { db } from "../firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
+import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css';
 
 const AddTask = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("Personal");
+  const [dueDate, setDueDate] = useState(null);
   const { user } = useAuth();
 
   const handleSubmit = async (e) => {
@@ -19,7 +22,7 @@ const AddTask = () => {
         description,
         category,
         status: "pending",
-        dueDate: "",
+        dueDate,
         createdAt: Timestamp.now(),
         userId: user.uid,
       });
@@ -53,6 +56,14 @@ const AddTask = () => {
           className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
           rows="3"
         ></textarea>
+        <DatePicker
+              selected={dueDate}
+              onChange={(date) => setDueDate(date)}
+              dateFormat="MMMM d, yyyy" // Date format
+              placeholderText="Select a date"
+              className="xl:w-[140vh] lg:w-[140vh] md:w-[130vh] px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200"
+              minDate={new Date()}
+            />
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}

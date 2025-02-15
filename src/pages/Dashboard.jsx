@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import AddTask from "./AddTask";
 import { db } from "../firebase";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
 
   //add new task
@@ -34,9 +36,6 @@ const Dashboard = () => {
       id: doc.id,
       ...doc.data(),
     }));
-    querySnapshot.forEach((doc) => {
-      console.log({ id: doc.id, ...doc.data() });
-    });
     setTasks(tasks);
   };
 
@@ -56,8 +55,6 @@ const Dashboard = () => {
             <h3 className="text-xl font-semibold mb-4 text-gray-800">
               Your Tasks
             </h3>
-            <h3 className="text-xl font-semibold mb-4 text-gray-800">Search</h3>
-            <h3 className="text-xl font-semibold mb-4 text-gray-800">filter</h3>
           </div>
           {tasks.length === 0 ? (
             <p className="text-gray-600">No tasks found. Add a new task!</p>
@@ -73,45 +70,60 @@ const Dashboard = () => {
                       <h4 className="text-lg font-medium text-gray-800">
                         {task.title}
                       </h4>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-gray-600 my-3">
                         {task.description}
                       </p>
                       <span
-                        className={`inline-block px-2 py-1 text-xs font-semibold rounded-full ${
-                          task.category === "Personal"
-                            ? "bg-blue-100 text-blue-800"
-                            : task.category === "Work"
+                        className={`inline-block px-2 py-1 mr-3 text-xs font-semibold rounded-full ${task.category === "Personal"
+                          ? "bg-blue-100 text-blue-800"
+                          : task.category === "Work"
                             ? "bg-green-100 text-green-800"
                             : "bg-purple-100 text-purple-800"
-                        }`}
+                          }`}
                       >
                         {task.category}
                       </span>
-                    </div>
-                    <button
-                      onClick={() => handleDeleteTask(task.id)}
-                      className="text-red-600 hover:text-red-800 focus:outline-none"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-6 w-6"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+                      <span
+                        className={`inline-block px-2 py-1 text-xs font-semibold rounded-full ${task.status === "pending"
+                          ? "bg-amber-300 text-yellow-900"
+                          : task.category === "Work"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-purple-100 text-purple-800"
+                          }`}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                        />
-                      </svg>
-                    </button>
+                        {task.status}
+                      </span>
+                    </div>
+                    <div className="flex gap-x-8">
+                      <button
+                        onClick={() => navigate(`/edit/${task.id}`)}
+                        className="text-indigo-600 hover:bg-indigo-200 rounded-full p-2 hover:text-indigo-800 focus:outline-none cursor-pointer"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor">
+                          <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={() => handleDeleteTask(task.id)}
+                        className="text-red-600 hover:bg-red-200 p-2 rounded-full hover:text-red-800 focus:outline-none cursor-pointer"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeWidth={2}
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
+                </div>))}
+            </div>)}
         </div>
       </div>
     </div>
