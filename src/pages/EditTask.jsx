@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { db } from '../firebase'; // Assuming you have a firebase.js file
-import { doc, getDoc, updateDoc, Timestamp, setDoc } from 'firebase/firestore';
-import { useAuth } from '../context/AuthContext';
+import { doc, getDoc, Timestamp, setDoc } from 'firebase/firestore';
 
 const EditTask = () => {
   const { taskId } = useParams();
@@ -10,7 +9,7 @@ const EditTask = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("Personal");
-  const { user } = useAuth();
+
 
   useEffect(() => {
     const fetchTask = async () => {

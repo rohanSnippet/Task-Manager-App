@@ -16,7 +16,7 @@ const Dashboard = () => {
   //delete tasks
   const handleDeleteTask = async (taskId) => {
     const isConfirmed = confirm("Do you want to delete this task?");
-    if (!isConfirmed) return; // Exit if the user cancels
+    if (!isConfirmed) return;
 
     try {
 
