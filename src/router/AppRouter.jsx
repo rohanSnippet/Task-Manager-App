@@ -5,6 +5,7 @@ import Signup from "../pages/Signup";
 import Dashboard from "../pages/Dashboard";
 import Header from "../pages/Header";
 import ProtectedRoute from "../pages/ProtectedRoute";
+import EditTask from "../pages/EditTask";
 
 const AppRouter = () => {
   return (
@@ -14,6 +15,7 @@ const AppRouter = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/edit/:taskId" element={<EditTask />} />
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Dashboard />
