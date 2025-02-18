@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -10,8 +11,33 @@ const Signup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    await signup(email, password).then((res)=>console.log(res));
-    navigate("/dashboard");
+  
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    });
+  
+    try {
+      const res = await signup(email, password);
+  
+      Toast.fire({
+        icon: "success",
+        title: "Account created successfully!",
+      });
+  
+      console.log("Signup successful:", res);
+      navigate("/dashboard");
+    } catch (error) {
+      console.error("Signup Error:", error);
+  
+      Toast.fire({
+        icon: "error",
+        title: error.message || "Signup failed! Please try again.",
+      });
+    }
   };
 
   return (

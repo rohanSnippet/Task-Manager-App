@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,12 +18,31 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+  
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    });
+  
     try {
-      const res = await login(email, password);
-      alert(`Welcome ${res?.user?.email}`);
+      await login(email, password);
+  
+      Toast.fire({
+        icon: "success",
+        title: "Signed in successfully",
+      });
+  
       navigate("/dashboard");
     } catch (error) {
-      alert(error.message);
+      console.error("Login Error:", error);
+  
+      Toast.fire({
+        icon: "error",
+        title: error.message || "Error!! Please try again.",
+      });
     }
   };
 

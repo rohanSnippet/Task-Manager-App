@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useRef } from "react";
+import Hero from "./Hero";
+import FeaturesSection from "./FeaturesSection";
+import Stats from "./Stats";
+import Testimonials from "./Testimonials";
+import FAQ from "./FAQ";
 
 const Home = () => {
-    return (
-      <div className="text-center p-10">
-        <h1 className="text-3xl font-bold">Welcome to Task Manager App</h1>
-        <p className="text-gray-600 mt-2">Manage your tasks efficiently</p>
-      </div>
-    );
-  };
-  export default Home;
+
+  const featuresRef = useRef(null);
+
+  const scrollToFeatures=()=>{
+    featuresRef.current.scrollIntoView({behaviour: "smooth"});
+  }
+
+  return (
+    <div>
+      <Hero onLearnMoreClick={scrollToFeatures}/>
+      <FeaturesSection ref={featuresRef}/>
+      <Stats/>
+      <Testimonials/>
+      <FAQ/>
+    </div>
+  );
+};
+export default Home;
