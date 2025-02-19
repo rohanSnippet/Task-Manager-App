@@ -22,7 +22,7 @@ const Profile = () => {
       });
     }
   }, [user]); // Runs only when `user` changes
-console.log(user)
+
   // Handle Input Change
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -13,6 +13,7 @@ const Home = () => {
     featuresRef.current.scrollIntoView({behaviour: "smooth"});
   }
 
+
   return (
     <div>
       <Hero onLearnMoreClick={scrollToFeatures}/>

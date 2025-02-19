@@ -9,7 +9,7 @@ const navigate = useNavigate();
       {/* Left Content */}
       <div className="md:w-1/2 text-center md:text-left">
         <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-          Organize Your Tasks, Boost Your Productivity
+          Organize Your Tasks, Boost Your Productivity 
         </h1>
         <p className="mt-4 text-lg text-gray-200">
           Manage your daily tasks efficiently with our powerful Task Manager. Stay on track, set deadlines, and achieve your goals effortlessly!
