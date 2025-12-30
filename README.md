@@ -13,3 +13,4 @@ Show deadline based of a particular task.
 Sort and filter tasks.
 Authentication using Firabase.
 User profile management.
+
