@@ -1,4 +1,16 @@
-This is a Task Manager App created with React and Firebase to Create, Update and Delete Tasks.
-User can also create and delete categories. 
-User can categories those tasks.
-User can see the deadlines of the task in an interactive manner.
+# This is Task Manager App.
+
+### Tech Stack:-
+React.
+Tailwind css.
+Firebase.
+
+### Functionalities:-
+Create, Update, Delete tasks.
+Create, Update, Delete Categories.
+Assign categories to tasks.
+Show deadline based of a particular task.
+Sort and filter tasks.
+Authentication using Firabase.
+User profile management.
+
